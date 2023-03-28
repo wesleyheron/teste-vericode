@@ -1,0 +1,50 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <input
+            type="text"
+            class="form-control"
+            id="descricao"
+            required
+            [(ngModel)]="tarefa.descricao"
+            name="descricao"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="data">Data</label>
+          <input
+            type="datetime"
+            class="form-control"
+            id="data"
+            required
+            [(ngModel)]="tarefa.data"
+            name="data"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input
+              type="text"
+              class="form-control"
+              id="status"
+              required
+              [(ngModel)]="tarefa.status"
+              name="status"
+            />
+          </div>
+
+          <br />
+  
+        <button (click)="saveTarefa()" class="btn btn-success">Enviar</button>
+      </div>
+  
+      <div *ngIf="submitted">        
+        <button class="btn btn-success" (click)="newTarefa()">Adicionar</button>
+        <h4>Tarefa enviada com sucesso!</h4>
+      </div>      
+    </div>
+  </div>

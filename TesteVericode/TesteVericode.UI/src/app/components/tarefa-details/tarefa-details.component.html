@@ -1,0 +1,91 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentTarefa.id">
+      <h4>Tarefa Selecionada</h4>      
+      <div>
+        <label><strong>Descricao:</strong></label>
+        {{ currentTarefa.descricao }}
+      </div>
+      <div>
+        <label><strong>Data:</strong></label>
+        {{ currentTarefa.data | date: 'dd/MM/yyyy' }}
+      </div>
+      <div>
+        <label><strong>Status:</strong></label>
+        {{ currentTarefa.status }}
+      </div>
+  
+      <a
+        class="btn btn-warning"
+        routerLink="/tarefas/{{ currentTarefa.id }}"
+      >
+        Edit
+      </a>
+    </div>
+  
+    <div *ngIf="!currentTarefa">
+      <br />
+      <p>Please click on a Tarefa...</p>
+    </div>
+  </div>
+  
+  <ng-template #editable>
+    <div *ngIf="currentTarefa.id" class="edit-form">
+      <h4>Tarefa</h4>
+      <form>        
+        <div class="form-group">
+          <label for="description">Descrição</label>
+          <input
+            type="text"
+            class="form-control"
+            id="descricao"
+            [(ngModel)]="currentTarefa.descricao"
+            name="descricao"
+            />
+        </div>
+
+        <div class="form-group">
+          <label for="data">Data</label>
+          <input
+            type="datetime"
+            class="form-control"
+            id="data"
+            [(ngModel)]="currentTarefa.data"
+            name="data"
+            />
+        </div>
+  
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input
+            type="text"
+            class="form-control"
+            id="status"
+            [(ngModel)]="currentTarefa.status"
+            name="status"
+            />
+        </div>
+        <br />
+      </form>      
+  
+      <div class="form-group d-flex gap-2 justify-content-end">
+        <button class="btn btn-danger mb-2" (click)="deleteTarefa()">
+          Excluir
+        </button>
+    
+        <button
+          type="submit"
+          class="btn btn-success mb-2 ml-2"
+          (click)="updateTarefa()"
+        >
+          Atualizar
+        </button>
+        
+      </div>
+      <p>{{ message }}</p>
+    </div>
+  
+    <div *ngIf="!currentTarefa.id">
+      <br />
+      <p>Cannot access this Tarefa...</p>
+    </div>
+  </ng-template>
